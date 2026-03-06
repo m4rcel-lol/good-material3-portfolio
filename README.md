@@ -195,8 +195,90 @@ To learn more about Next.js, take a look at the following resources:
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+## Deployment
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+This project is configured for static export and can be deployed to various platforms. The CSS and asset paths are automatically configured based on your deployment type.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Deploy to Custom Domain (Vercel, Netlify, etc.)
+
+For deployments to a custom domain or root path (e.g., `https://yourdomain.com/`):
+
+1. **Build the project:**
+   ```bash
+   npm run build
+   ```
+
+2. **Deploy the `out/` folder** to your hosting platform:
+   - **Vercel**: Connect your repo and deploy (automatic)
+   - **Netlify**: Drag the `out/` folder or connect via Git
+   - **Other hosts**: Upload the `out/` folder contents
+
+The CSS and assets will work correctly without any additional configuration.
+
+### Deploy to GitHub Pages (Repository)
+
+For GitHub Pages deployment at a subpath (e.g., `https://username.github.io/repo-name/`):
+
+1. **Set the base path** before building:
+   ```bash
+   # For repository named "good-material3-portfolio"
+   NEXT_PUBLIC_BASE_PATH=/good-material3-portfolio npm run build
+   ```
+
+2. **Deploy the `out/` folder** to GitHub Pages:
+   - Enable GitHub Pages in repository settings
+   - Set source to "GitHub Actions" or upload `out/` to `gh-pages` branch
+
+3. **Or use GitHub Actions** (recommended):
+
+   Create `.github/workflows/deploy.yml`:
+   ```yaml
+   name: Deploy to GitHub Pages
+
+   on:
+     push:
+       branches: [main]
+
+   jobs:
+     deploy:
+       runs-on: ubuntu-latest
+       steps:
+         - uses: actions/checkout@v4
+         - uses: actions/setup-node@v4
+           with:
+             node-version: '20'
+         - run: npm ci
+         - run: NEXT_PUBLIC_BASE_PATH=/good-material3-portfolio npm run build
+         - uses: peaceiris/actions-gh-pages@v3
+           with:
+             github_token: ${{ secrets.GITHUB_TOKEN }}
+             publish_dir: ./out
+   ```
+
+   **Important:** Replace `/good-material3-portfolio` with your actual repository name.
+
+### Understanding Base Path Configuration
+
+The `next.config.ts` includes:
+```typescript
+basePath: process.env.NEXT_PUBLIC_BASE_PATH || '',
+```
+
+This ensures:
+- **Custom domain**: CSS links use `/path/to/asset.css` (works at root)
+- **GitHub Pages**: CSS links use `/repo-name/path/to/asset.css` (works in subdirectory)
+
+**Never hardcode the basePath** - always use the environment variable for flexibility.
+
+### Verifying Your Deployment
+
+After deploying, verify that:
+1. The page loads without styling issues
+2. Dark/light theme toggle works
+3. All images and assets load correctly
+4. Navigation links work properly
+
+If CSS doesn't load, check:
+- Browser console for 404 errors on CSS files
+- Base path matches your deployment URL structure
+- The `out/` folder contains `_next/static/` directory
