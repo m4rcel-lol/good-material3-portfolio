@@ -2,6 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+/**
+ * Material Design 3 Theme System
+ *
+ * This file defines the Material Design 3 color tokens and shape system.
+ * Colors automatically adapt between light and dark themes.
+ *
+ * To customize colors:
+ * 1. Visit https://m3.material.io/theme-builder
+ * 2. Generate tokens based on your brand color
+ * 3. Replace the values below
+ *
+ * All tokens are available in Tailwind with 'md-' prefix:
+ * - bg-md-primary, text-md-on-surface, border-md-outline, etc.
+ */
+
 :root {
   /* Material 3 Dark Theme tokens (default) */
   --md-sys-color-primary: #D0BCFF;
@@ -25,6 +40,7 @@
   --md-sys-color-on-surface-variant: #CAC4D0;
   --md-sys-color-outline: #938F99;
   --md-sys-color-outline-variant: #49454F;
+  /* Surface elevation levels (lowest to highest) */
   --md-sys-color-surface-container-lowest: #0F0D13;
   --md-sys-color-surface-container-low: #1D1B20;
   --md-sys-color-surface-container: #211F26;
@@ -36,7 +52,7 @@
   --md-sys-color-scrim: #000000;
   --md-sys-color-shadow: #000000;
 
-  /* Shape */
+  /* Shape system - used for border radius */
   --md-sys-shape-corner-extra-small: 4px;
   --md-sys-shape-corner-small: 8px;
   --md-sys-shape-corner-medium: 12px;
@@ -45,6 +61,7 @@
   --md-sys-shape-corner-full: 9999px;
 }
 
+/* Light theme - applied when .light class is on <html> element */
 .light {
   --md-sys-color-primary: #6750A4;
   --md-sys-color-on-primary: #FFFFFF;
@@ -91,6 +108,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Respect user's motion preferences */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
@@ -98,3 +116,4 @@ body {
     transition-duration: 0.01ms !important;
   }
 }
+
