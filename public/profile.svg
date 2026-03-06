@@ -1,0 +1,15 @@
+<svg width="256" height="256" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient -->
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4F378B;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#D0BCFF;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Circle background -->
+  <circle cx="128" cy="128" r="128" fill="url(#grad1)"/>
+
+  <!-- Text "m5" -->
+  <text x="128" y="158" font-family="monospace" font-size="80" font-weight="bold" fill="#FFFFFF" text-anchor="middle">m5</text>
+</svg>
