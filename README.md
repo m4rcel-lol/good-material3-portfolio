@@ -215,6 +215,21 @@ For deployments to a custom domain or root path (e.g., `https://yourdomain.com/`
 
 The CSS and assets will work correctly without any additional configuration.
 
+#### ⚠️ IMPORTANT: Vercel Deployment Issue
+
+**If your site looks broken on Vercel (CSS not loading, no styling):**
+
+The most common cause is having the `NEXT_PUBLIC_BASE_PATH` environment variable set in Vercel when it shouldn't be.
+
+**Quick Fix:**
+1. Go to your Vercel project → **Settings** → **Environment Variables**
+2. **DELETE** the `NEXT_PUBLIC_BASE_PATH` variable if it exists
+3. Redeploy your site
+
+**Why:** The `NEXT_PUBLIC_BASE_PATH` variable is only for GitHub Pages subdirectory deployments. When set on Vercel, it causes CSS and assets to try loading from the wrong path (e.g., `/repo-name/_next/...` instead of `/_next/...`), resulting in 404 errors.
+
+📖 **See [VERCEL_DEPLOYMENT_TROUBLESHOOTING.md](./VERCEL_DEPLOYMENT_TROUBLESHOOTING.md) for detailed troubleshooting steps.**
+
 ### Deploy to GitHub Pages (Repository)
 
 For GitHub Pages deployment at a subpath (e.g., `https://username.github.io/repo-name/`):
