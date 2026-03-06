@@ -7,6 +7,14 @@ export const profile = {
   description: "Performance-first full-stack apps, clean APIs, terminal tools, and game ecosystem experiments",
   location: "Poland",
   timezone: "Europe/Warsaw",
+  // Profile picture configuration
+  // To use a profile picture:
+  // 1. Add your image to the /public folder (e.g., /public/profile.jpg)
+  // 2. Set profileImage to the path: "/profile.jpg"
+  // 3. Optionally set a fallback initial (e.g., "MR" for Marcel R.)
+  // If profileImage is null, the fallback text will be displayed
+  profileImage: null, // e.g., "/profile.jpg" or null to use fallback
+  fallbackInitial: "m5", // Text shown when no profile image is set
   links: {
     github: "https://github.com/m4rcel-lol",
     website: "#",

@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { Github, Mail, MapPin, Clock } from 'lucide-react'
+import Image from 'next/image'
 import { profile } from '@/data/profile'
 
 function PolandClock() {
@@ -34,8 +35,21 @@ export default function Hero() {
           className="mb-8 flex justify-center"
         >
           <div className="relative animate-float">
-            <div className="w-28 h-28 rounded-full bg-md-primary-container flex items-center justify-center shadow-2xl border-2 border-md-primary/30">
-              <span className="text-4xl font-black text-md-on-primary-container font-mono tracking-tighter">m5</span>
+            <div className="w-28 h-28 rounded-full bg-md-primary-container flex items-center justify-center shadow-2xl border-2 border-md-primary/30 overflow-hidden">
+              {profile.profileImage ? (
+                <Image
+                  src={profile.profileImage}
+                  alt={`${profile.name} profile picture`}
+                  width={112}
+                  height={112}
+                  className="w-full h-full object-cover"
+                  priority
+                />
+              ) : (
+                <span className="text-4xl font-black text-md-on-primary-container font-mono tracking-tighter">
+                  {profile.fallbackInitial}
+                </span>
+              )}
             </div>
             <div className="absolute -bottom-1 -right-1 w-7 h-7 bg-green-500 rounded-full border-2 border-md-background flex items-center justify-center">
               <div className="w-2.5 h-2.5 bg-green-300 rounded-full animate-pulse" />
